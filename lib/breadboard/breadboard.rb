@@ -29,7 +29,7 @@ class Breadboard
   def configure_services
     classes = ActiveResource::Base.send(:subclasses)
     classes.each do |klass|
-      klass.constantize.site = service_for(klass)
+      klass.constantize.site = service_for(klass) if klass.constantize.site == nil
     end
   end
 end
