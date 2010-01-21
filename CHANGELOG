@@ -1,0 +1,2 @@
+v0.0.2
+  now honors site settings that have already been configured in your activeresource derived model
