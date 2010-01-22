@@ -1,2 +1,5 @@
+v0.1.0
+  beta version. works on actual rails sites.
+
 v0.0.2
   now honors site settings that have already been configured in your activeresource derived model
