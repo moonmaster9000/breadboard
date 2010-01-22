@@ -1,6 +1,6 @@
 =Introduction
 
-breadboard.yml is to ActiveResource as database.yml is to ActiveRecord. If you have the situation where the services you connect your ActiveResource models to depends on your RAILS environment, then breadboard is for you.
+breadboard.yml is to ActiveResource as database.yml is to ActiveRecord, taking the data source configuration out of the models and putting it where it belongs, in a configuration file. If the services you connect your ActiveResource models to depends on your RAILS_ENV, then breadboard is for you.
 
 =Install
 
