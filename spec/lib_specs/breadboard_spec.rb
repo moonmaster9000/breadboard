@@ -28,7 +28,7 @@ describe Breadboard do
       class Author < ActiveResource::Base; end
       class Article < ActiveResource::Base; end
       class Genre < ActiveResource::Base; end
-      Breadboard.new(@yml)
+      define_const "BREAD_BOARD", Breadboard.new(@yml)
       Book.site.host.should == "all.book.services.com"
       Author.site.host.should == "development.author.services.com"
       Article.site.host.should == "services.com"

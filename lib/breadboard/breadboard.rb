@@ -5,7 +5,6 @@ class Breadboard
   
   def initialize(config_yml)
     @config = YAML.load config_yml
-    configure_services
   end
   
   def environment
@@ -24,12 +23,21 @@ class Breadboard
     (@config['default']['all'] rescue nil)        || 
     ''
   end
-  
-  private
-  def configure_services
-    classes = ActiveResource::Base.send(:subclasses)
-    classes.each do |klass|
-      klass.constantize.site = service_for(klass) if klass.constantize.site == nil
+end
+
+class ActiveResource::Base
+  class << self
+    def site_with_breadboard
+      if defined?(BREAD_BOARD)
+        unless @site 
+          self.site = BREAD_BOARD.service_for(self.to_s)
+        end
+        @site
+      else
+        self.site_without_breadboard
+      end
     end
+
+    alias_method_chain :site, :breadboard
   end
 end
