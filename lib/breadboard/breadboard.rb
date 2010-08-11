@@ -16,9 +16,15 @@ class Breadboard
   end
   
   def service_for(klass)
-    klass = klass.downcase
-    (@config[klass][environment] rescue nil)      || 
-    (@config[klass]['all'] rescue nil)            ||
+    serv = nil
+    while serv.nil? && klass != ActiveResource::Base do
+      table = klass.to_s.tableize.singularize
+      serv = (@config[table][environment] rescue nil) || 
+        (@config[table]['all'] rescue nil) || 
+        nil
+      klass = klass.superclass
+    end
+    serv                                          ||
     (@config['default'][environment] rescue nil)  || 
     (@config['default']['all'] rescue nil)        || 
     ''
@@ -30,7 +36,7 @@ class ActiveResource::Base
     def site_with_breadboard
       if defined?(BREAD_BOARD)
         unless @site 
-          self.site = BREAD_BOARD.service_for(self.to_s)
+          self.site = BREAD_BOARD.service_for(self)
         end
         @site
       else
@@ -39,5 +45,14 @@ class ActiveResource::Base
     end
 
     alias_method_chain :site, :breadboard
+    
+    def connection_with_breadboard(refresh = false)
+      # setting @connection = nil would trigger Connection.new(site...
+      # @connection is set to nil when calling self.site = 'url' as well
+      @connection = nil
+      connection_without_breadboard
+    end
+    
+    alias_method_chain :connection, :breadboard
   end
 end

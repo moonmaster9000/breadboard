@@ -6,7 +6,9 @@ describe Breadboard do
       "default:\n  all:  http://services.com\n\n" +
       "article:\n  production: http://article.services.com\n\n" +
       "author:\n  development: http://development.author.services.com\n\n" + 
-      "book:\n  all: http://all.book.services.com"
+      "book:\n  all: http://all.book.services.com\n\n" +
+      "genre:\n  all: http://all.genre.services.com\n\n" +
+      "sub_genre:\n  production: http://all.sub.genre.services.com"
   end
   
   describe "#initialize" do
@@ -28,11 +30,13 @@ describe Breadboard do
       class Author < ActiveResource::Base; end
       class Article < ActiveResource::Base; end
       class Genre < ActiveResource::Base; end
+      class SubGenre < Genre; end
       define_const "BREAD_BOARD", Breadboard.new(@yml)
       Book.site.host.should == "all.book.services.com"
       Author.site.host.should == "development.author.services.com"
       Article.site.host.should == "services.com"
-      Genre.site.host.should == "services.com"
+      Genre.site.host.should == "all.genre.services.com"
+      SubGenre.site.host.should == "all.genre.services.com"
     end
   end
   
@@ -62,9 +66,11 @@ describe Breadboard do
     end
     
     it "should return the appropriate service for that class" do
-      @s.service_for('Article').should == 'http://article.services.com'
-      @s.service_for('Author').should == 'http://services.com'
-      @s.service_for('Book').should == 'http://all.book.services.com'
+      @s.service_for(Article).should == 'http://article.services.com'
+      @s.service_for(Author).should == 'http://services.com'
+      @s.service_for(Book).should == 'http://all.book.services.com'
+      @s.service_for(Genre).should == 'http://all.genre.services.com'
+      @s.service_for(SubGenre).should == 'http://all.sub.genre.services.com'
     end
   end
 end
