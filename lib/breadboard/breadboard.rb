@@ -1,16 +1,19 @@
 class Breadboard
-  attr_reader :config
+  attr_reader :config, :env
   
   class EnvironmentUnknownError < StandardError; end
   
-  def initialize(config_yml)
+  def initialize(config_yml, options={})
     @config = YAML.load config_yml
+    @env = options[:env]
   end
   
   def environment
     begin
       RAILS_ENV
-    rescue 
+    rescue
+      return @env if @env
+ 
       raise EnvironmentUnknownError, "RAILS_ENV environment unknown" 
     end
   end

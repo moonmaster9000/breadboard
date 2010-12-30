@@ -41,17 +41,25 @@ describe Breadboard do
   end
   
   describe "#environment" do
-    before do
-      define_const "RAILS_ENV", 'breadboard_test'
+    describe "in rails app" do
+      before do
+        define_const "RAILS_ENV", 'breadboard_test'
+      end
+      
+      it "should return the rails environment if it is set" do
+        Breadboard.new(@yml).environment.should == 'breadboard_test'
+      end
+      
+      it "should return UNKNOWN_ENVIRONMENT if the rails environment isn't set" do
+        undefine_const "RAILS_ENV"
+        proc {Breadboard.new(@yml).environment}.should raise_error(Breadboard::EnvironmentUnknownError)
+      end
     end
-    
-    it "should return the rails environment if it is set" do
-      Breadboard.new(@yml).environment.should == 'breadboard_test'
-    end
-    
-    it "should return UNKNOWN_ENVIRONMENT if the rails environment isn't set" do
-      undefine_const "RAILS_ENV"
-      proc {Breadboard.new(@yml).environment}.should raise_error(Breadboard::EnvironmentUnknownError)
+  
+    describe "in non rails app" do
+      it "should return manually specified env" do
+        Breadboard.new(@yml, :env => "custom_env").environment.should == 'custom_env'
+      end
     end
   end
   
