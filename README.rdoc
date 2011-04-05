@@ -51,3 +51,7 @@ Now suppose you have a 'Book' model that needs to connect to a different service
     production: http://my.book.production.service.provider
 
 I think you can see where this is going...
+
+
+If used in a plain ruby app. you have to specify BREAD_BOARD manually, for exmaple:
+  BREAD_BOARD = Breadboard.new(YOUR_YAML_STR, :env => "development")
