@@ -1,8 +1,8 @@
-=Introduction
+#Introduction
 
 breadboard.yml is to ActiveResource as database.yml is to ActiveRecord, taking the data source configuration out of the models and putting it where it belongs, in a configuration file. If the services you connect your ActiveResource models to depends on your RAILS_ENV, then breadboard is for you.
 
-=Install
+##Install
 
 Breadboard is available as a gem: 
 
@@ -12,7 +12,7 @@ If you'd like to use this in your rails project, add the following to your confi
 
   config.gem 'breadboard'
 
-=Usage
+##Usage
 
 All you have to do is create a breadboard.yml file in your RAILS_ROOT/config directory. 
 
