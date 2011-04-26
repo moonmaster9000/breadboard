@@ -8,6 +8,17 @@ module Breadboard
   def configure(&block)
     Config.instance_eval &block
   end
+  
+  def service_for(model, environment=nil)
+    environment ||= Rails.env.to_sym rescue :all
+    model_symbol = model.to_s.to_sym
+    model_superclass_chain = [model] + model.ancestors
+    model_superclass_chain.each do |klass|
+      site = config.send(model_symbol).send(environment) || config.send(model_symbol).send(:all)
+      return site if site
+    end
+    return config.default.send(environment) || config.default.send(:all)
+  end
 
   def reset
     Config.reset
