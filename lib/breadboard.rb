@@ -1,4 +1,5 @@
 require 'active_resource'
-require 'active_support'
+require 'active_support/core_ext/string'
 require 'breadboard/breadboard'
-BREAD_BOARD = Breadboard.new((File.open(RAILS_ROOT.to_s + "/config/breadboard.yml") rescue "")) if defined?(RAILS_ROOT)
+require 'breadboard/config'
+require 'breadboard/environment'
