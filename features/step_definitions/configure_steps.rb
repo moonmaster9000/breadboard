@@ -17,8 +17,8 @@ Then /^I should be able to configure breadboard via Ruby blocks$/ do
     end
   end
 
-  Breadboard.config.default.all.should == "http://localhost:3000"
-  Breadboard.config.default.production.should == "http://test.com"
+  Breadboard.config.default.all.to_s.should == "http://localhost:3000"
+  Breadboard.config.default.production.to_s.should == "http://test.com"
 end
 
 Then /^I should be able to create a default configuration via the "default" Config method$/ do
@@ -31,8 +31,8 @@ Then /^I should be able to create a default configuration via the "default" Conf
     end
   end
 
-  Breadboard.config.default.all.should == "http://localhost:3000"
-  Breadboard.config.default.production.should == "http://test.com"
+  Breadboard.config.default.all.to_s.should == "http://localhost:3000"
+  Breadboard.config.default.production.to_s.should == "http://test.com"
 end
 
 Then /^I should be able to configure models via their lowercased, underscored method equivalents$/ do
@@ -40,11 +40,11 @@ Then /^I should be able to configure models via their lowercased, underscored me
   
   Breadboard.configure do
     article do
-      production "haha"
+      production "http://haha"
     end
   end
   
-  Breadboard.config.Article.production.should == "haha"
+  Breadboard.config.Article.production.to_s.should == "http://haha"
 end
 
 Then /^I should be able to configure a model by passing the constant for the model to the "model" method$/ do
@@ -52,11 +52,11 @@ Then /^I should be able to configure a model by passing the constant for the mod
   
   Breadboard.configure do
     model Smarticle do
-      production "haha"
+      production "http://haha"
     end
   end
   
-  Breadboard.config.Smarticle.production.should == "haha"
+  Breadboard.config.Smarticle.production.to_s.should == "http://haha"
 end
 
 Then /^I should be able to configure multiple models simultaneously by passing their constants to the "models" method$/ do
@@ -65,12 +65,12 @@ Then /^I should be able to configure multiple models simultaneously by passing t
   
   Breadboard.configure do
     models Particle, Yarticle do
-      production "haha"
+      production "http://haha"
     end
   end
   
-  Breadboard.config.Particle.production.should == "haha"
-  Breadboard.config.Yarticle.production.should == "haha"
+  Breadboard.config.Particle.production.to_s.should == "http://haha"
+  Breadboard.config.Yarticle.production.to_s.should == "http://haha"
 end
 
 Then /^I should be able to override the default Rails\.env environment retrieval in case I'm not in a rails app$/ do

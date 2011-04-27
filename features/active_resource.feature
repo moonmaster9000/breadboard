@@ -59,4 +59,4 @@ Feature: ActiveResource::Base looks up site config in breadboard
     And an empty Breadboard configuration
     And my Rails environment is "production"
     When I call the model's site method
-    Then I should recieve an empty string
+    Then I should recieve nil

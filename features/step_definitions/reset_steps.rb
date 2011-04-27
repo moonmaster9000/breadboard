@@ -7,7 +7,7 @@ Given /^I have configured breadboard$/ do
 end
 
 When /^I call the method Breadboard\.reset$/ do
-  Breadboard.config.default.all.should == "http://test.com"
+  Breadboard.config.default.all.to_s.should == "http://test.com"
   Breadboard.reset
 end
 
