@@ -11,10 +11,10 @@ module Breadboard
   
   def service_for(model, environment=nil)
     environment ||= Rails.env.to_sym rescue :all
-    model_symbol = model.to_s.to_sym
     model_superclass_chain = [model] + model.ancestors
     model_superclass_chain.each do |klass|
-      site = config.send(model_symbol).send(environment) || config.send(model_symbol).send(:all)
+      klass_symbol = klass.to_s.to_sym
+      site = config.send(klass_symbol).send(environment) || config.send(klass_symbol).send(:all)
       return site if site
     end
     return config.default.send(environment) || config.default.send(:all)
