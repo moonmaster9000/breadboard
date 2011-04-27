@@ -6,7 +6,7 @@ Change your ActiveResource service providers based on your environment.
 
 Breadboard is available as a gem: 
 
-  # gem install breadboard
+    # gem install breadboard
 
 ##Usage
 
