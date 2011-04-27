@@ -6,6 +6,12 @@ module Breadboard
       @config ||= {}
     end
     
+    def env(&block)
+      @env ||= proc { Rails.env }
+      return @env.call unless block
+      @env = block 
+    end
+    
     def default(&block)
       config_or_access :default, &block
     end

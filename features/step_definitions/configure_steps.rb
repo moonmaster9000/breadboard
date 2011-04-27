@@ -72,3 +72,18 @@ Then /^I should be able to configure multiple models simultaneously by passing t
   Breadboard.config.Particle.production.should == "haha"
   Breadboard.config.Yarticle.production.should == "haha"
 end
+
+Then /^I should be able to override the default Rails\.env environment retrieval in case I'm not in a rails app$/ do
+  unless defined? Rails
+    Rails = double "Rails"
+  end
+  Rails.stub(:env).and_return "rails-breadboard-test"
+  Rails.env.should == "rails-breadboard-test"
+  Breadboard.env.should == "rails-breadboard-test"
+  Breadboard.configure do
+    env do
+      "override!"
+    end
+  end
+  Breadboard.env.should == "override!"
+end

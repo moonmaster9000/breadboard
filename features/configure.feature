@@ -22,3 +22,7 @@ Feature: Configuring Breadboard
   Scenario: configuring multiple models via the "models" method
     Given I have required breadboard
     Then I should be able to configure multiple models simultaneously by passing their constants to the "models" method
+  
+  Scenario: configuring the method for determining the Rails environment
+    Given I have required breadboard
+    Then I should be able to override the default Rails.env environment retrieval in case I'm not in a rails app
