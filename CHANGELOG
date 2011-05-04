@@ -1,3 +1,6 @@
+v0.2.2
+  Custom environment attribute takes priority over rails_env
+
 v0.2.1
   Works for plain ruby app too.
 

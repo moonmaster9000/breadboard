@@ -9,11 +9,11 @@ class Breadboard
   end
   
   def environment
+    return @env if @env
+
     begin
       RAILS_ENV
     rescue
-      return @env if @env
- 
       raise EnvironmentUnknownError, "RAILS_ENV environment unknown" 
     end
   end
