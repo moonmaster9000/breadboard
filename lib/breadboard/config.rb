@@ -33,11 +33,12 @@ module Breadboard
     end
 
     def method_missing(method_name, *args, &block)
-      config_or_access method_name.to_s.camelize.constantize, &block
+      config_or_access method_name, &block
     end
 
     private
     def config_or_access(model, &block)
+      model = model.to_s.camelize.to_sym
       config[model] ||= Environment.new
       if block
         config[model].instance_eval &block
