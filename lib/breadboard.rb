@@ -1,7 +1,6 @@
 require 'active_resource'
-require 'active_support'
+require 'active_support/core_ext/string'
 require 'breadboard/breadboard'
-BREAD_BOARD = Breadboard.new((File.open(RAILS_ROOT.to_s + "/config/breadboard.yml") rescue "")) if defined?(RAILS_ROOT)
-
-# if used in a plain ruby app. you have to specify BREAD_BOARD manually, for exmaple:
-#   BREAD_BOARD = Breadboard.new(YOUR_YAML_STR, :env => "development")
+require 'breadboard/config'
+require 'breadboard/environment'
+require 'breadboard/active_resource'

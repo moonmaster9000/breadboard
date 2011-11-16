@@ -1,8 +1,20 @@
-v0.2.2
-  Custom environment attribute takes priority over rails_env
+v1.0.0
+  No change since beta 2; after using beta 2 in several production apps and not running into any more bugs, i've decided it's good for 1.0.0 GA.
 
-v0.2.1
-  Works for plain ruby app too.
+v1.0.0.beta.2
+  Fixed a bug caused by Rails reloading. Note: never use class name constant as a hash key. Rails reloading will screw you.
+
+v1.0.0.beta.1
+  Cleaning up comments; ready for public consumption
+
+v1.0.0.alpha.3
+  Bug fix: define @connection
+
+v1.0.0.alpha.2
+  Bug fix: site in breadboard wasn't getting parsed
+
+v1.0.0.alpha.1
+  Complete rewrite. You now configure Breadboard through a Ruby DSL.
 
 v0.2.0
   Rails 3 compatible! thx Dorren Chen!
