@@ -87,3 +87,44 @@ Then /^I should be able to override the default Rails\.env environment retrieval
   end
   Breadboard.env.should == "override!"
 end
+
+Then /^I should be able to configure breadboard with hash$/ do
+  hash = {:site => "http://localhost:3000",
+          :user => "admin",
+          :password => "password"}
+
+  Breadboard.configure do
+    default do
+      all hash
+      development hash.merge(:site => "http://test")
+    end
+  end
+
+  Breadboard.config.default.all.should be_kind_of(Hash)
+  Breadboard.config.default.development[:user].should == "admin"
+  Breadboard.config.default.development[:site].should == "http://test"
+end
+
+Then /^I should be able to configure model with user, password$/ do
+  require 'ruby-debug'
+  class Venue < ActiveResource::Base
+  end
+
+  Breadboard.configure do
+    env {"production"}
+
+    model Venue do
+      all        Hash[:site => "http://localhost:3000",
+                      :user => "admin",
+                      :password => "password"]
+
+      production Hash[:site => "http://livesite",
+                      :user => "admin",
+                      :password => "secret"]
+    end
+  end
+  
+  Venue.site.to_s.should == "http://livesite"
+  Venue.password.should == "secret"
+end
+
