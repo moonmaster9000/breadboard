@@ -26,3 +26,11 @@ Feature: Configuring Breadboard
   Scenario: configuring the method for determining the Rails environment
     Given I have required breadboard
     Then I should be able to override the default Rails.env environment retrieval in case I'm not in a rails app
+
+  Scenario: Configure Breadboard with hash instead of url
+    Given I have required breadboard
+    Then I should be able to configure breadboard with hash
+
+  Scenario: Configure model with user, password
+    Given I have required breadboard
+    Then I should be able to configure model with user, password
