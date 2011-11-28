@@ -76,7 +76,7 @@ Now suppose you have a 'Book' model that needs to connect to a different service
       end
     end
 
-If you need to set user and password for a restful service, you can do so with a block
+If you need to set user and password for a restful service, you can do so with a block (as of version 1.1.0.rc1)
 
     Breadboard.configure do
       model Book do
