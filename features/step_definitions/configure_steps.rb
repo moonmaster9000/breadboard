@@ -132,6 +132,7 @@ Then /^I should be able to configure model with user, password$/ do
     end
   end
   
+  Venue.site.should be_kind_of URI
   Venue.site.to_s.should == "http://livesite"
   Venue.password.should == "secret"
 end
