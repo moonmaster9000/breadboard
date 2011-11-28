@@ -11,8 +11,17 @@ module Breadboard
       end
 
       def method_missing(method_name, *args, &block)
-        return @environments[method_name] if args.length == 0
-        @environments[method_name] = URI.parse args.first 
+        if block_given?
+          @environments[method_name] ||= EnvConfig.new
+          @environments[method_name].instance_eval &block
+        else
+          if args.length == 0
+            @environments[method_name]
+          else
+            @environments[method_name] ||= EnvConfig.new
+            @environments[method_name].site  URI.parse args.first
+          end
+        end
       end
     end
   end
