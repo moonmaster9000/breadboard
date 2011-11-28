@@ -76,13 +76,14 @@ Now suppose you have a 'Book' model that needs to connect to a different service
       end
     end
 
-If you need to set user and password for a restful service, you can use hash instead of string
+If you need to set user and password for a restful service, you can do so with a block
 
     Breadboard.configure do
       model Book do
-        production Hash[:site => "http://my.book.production.service.provider",
-                        :user => "user1",
-                        :password => "password"]
+        production do
+          site     "http://my.book.production.service.provider"
+          user     "user1"
+          password "password"
       end
     end
 

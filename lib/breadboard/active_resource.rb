@@ -6,7 +6,7 @@ module ActiveResource
           define_method "#{attr}_with_breadboard" do
             @site || begin
               setting = Breadboard.service_for(self)
-              setting.kind_of?(Hash) ? setting[attr.to_sym] : setting
+              setting.kind_of?(Breadboard::Config::EnvConfig) ? setting.send(attr) : setting
             end
           end
           alias_method_chain attr, :breadboard

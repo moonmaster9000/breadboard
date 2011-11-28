@@ -89,20 +89,24 @@ Then /^I should be able to override the default Rails\.env environment retrieval
 end
 
 Then /^I should be able to configure breadboard with hash$/ do
-  hash = {:site => "http://localhost:3000",
-          :user => "admin",
-          :password => "password"}
-
   Breadboard.configure do
     default do
-      all hash
-      development hash.merge(:site => "http://test")
+      all do
+        site "http://localhost:3000"
+        user "admin"
+        password "password"
+      end
+
+      development "http://test"
     end
   end
 
-  Breadboard.config.default.all.should be_kind_of(Hash)
-  Breadboard.config.default.development[:user].should == "admin"
-  Breadboard.config.default.development[:site].should == "http://test"
+  Breadboard.config.default.all.to_s.should == "http://localhost:3000"
+  Breadboard.config.default.all.site.to_s.should == "http://localhost:3000"
+  Breadboard.config.default.all.user.should == "admin"
+  Breadboard.config.default.all.password.should == "password"
+
+  Breadboard.config.default.development.to_s.should == "http://test"
 end
 
 Then /^I should be able to configure model with user, password$/ do
@@ -114,13 +118,17 @@ Then /^I should be able to configure model with user, password$/ do
     env {"production"}
 
     model Venue do
-      all        Hash[:site => "http://localhost:3000",
-                      :user => "admin",
-                      :password => "password"]
+      all do
+        site "http://localhost:3000"
+        user "admin"
+        password "password"
+      end
 
-      production Hash[:site => "http://livesite",
-                      :user => "admin",
-                      :password => "secret"]
+      production do
+        site "http://livesite"
+        user "admin"
+        password "secret"
+      end
     end
   end
   
