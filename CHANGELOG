@@ -1,3 +1,6 @@
+v1.1.0.rc1
+  set user, password parameters with block instead of hash (see the README).
+
 v1.0.0
   No change since beta 2; after using beta 2 in several production apps and not running into any more bugs, i've decided it's good for 1.0.0 GA.
 

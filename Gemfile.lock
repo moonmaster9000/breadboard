@@ -1,20 +1,20 @@
 PATH
   remote: .
   specs:
-    breadboard (1.0.0)
+    breadboard (1.0.2)
       activeresource (~> 3.0)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    activemodel (3.0.7)
-      activesupport (= 3.0.7)
+    activemodel (3.0.11)
+      activesupport (= 3.0.11)
       builder (~> 2.1.2)
       i18n (~> 0.5.0)
-    activeresource (3.0.7)
-      activemodel (= 3.0.7)
-      activesupport (= 3.0.7)
-    activesupport (3.0.7)
+    activeresource (3.0.11)
+      activemodel (= 3.0.11)
+      activesupport (= 3.0.11)
+    activesupport (3.0.11)
     builder (2.1.2)
     cucumber (0.10.2)
       builder (>= 2.1.2)
