@@ -1,3 +1,5 @@
+v1.1.0.rc2
+  fix bug so that site set in env block returns URI instance
 v1.1.0.rc1
   set user, password parameters with block instead of hash (see the README).
 
