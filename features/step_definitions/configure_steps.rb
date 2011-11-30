@@ -110,7 +110,6 @@ Then /^I should be able to configure breadboard with hash$/ do
 end
 
 Then /^I should be able to configure model with user, password$/ do
-  require 'ruby-debug'
   class Venue < ActiveResource::Base
   end
 
