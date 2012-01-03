@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    breadboard (1.0.2)
+    breadboard (1.1.0.rc2)
       activeresource (~> 3.0)
 
 GEM

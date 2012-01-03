@@ -2,26 +2,32 @@ module Breadboard
   module Config
     # holds site, user, password values for an environment instance
     class EnvConfig
-      def initialize
-        @config = {}
+      def site(url=nil)
+        return @site unless url
+        
+        if url.kind_of?(URI)
+          @site = url
+        else
+          @site = URI.parse url
+        end
       end
 
-      def method_missing(method_name, *args, &block)
-        return @config[method_name] if args.length == 0
+      def user(username=nil)
+        return @user unless username
+        @user = username
+      end
 
-        val = args.first
-        if method_name == :site and val.kind_of?(String)
-          val = URI.parse(val)
-        end
-        @config[method_name] = val
+      def password(pass=nil)
+        return @password unless pass
+        @password = pass
       end
 
       def to_s
-        @config[:site].to_s
+        @site.to_s
       end
 
       def empty?
-        @config.empty?
+        !(site || password || user)
       end
     end
   end
