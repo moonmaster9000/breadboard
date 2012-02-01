@@ -5,11 +5,17 @@ module Breadboard
         @environments = {}
       end
 
-      def test(url=nil)
+      def test(url=nil, &block)
         return @environments[:test] if url.nil?
-        @environments[:test] = URI.parse url
-      end
+        @environments[:test] ||= EnvConfig.new 
 
+        if block_given?
+          @environments[:test].instance_eval block
+        else
+          @environments[:test].site URI.parse(url)
+        end
+      end      
+      
       def method_missing(method_name, *args, &block)
         if block_given?
           @environments[method_name] ||= EnvConfig.new

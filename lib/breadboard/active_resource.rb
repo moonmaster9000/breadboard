@@ -4,7 +4,7 @@ module ActiveResource
       class_eval do
         %w(site user password).each do |attr|
           define_method "#{attr}_with_breadboard" do
-            @site || begin
+            instance_variable_get("@#{attr}") || begin
               setting = Breadboard.service_for(self)
               setting.kind_of?(Breadboard::Config::EnvConfig) ? setting.send(attr) : setting
             end
