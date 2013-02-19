@@ -19,9 +19,19 @@ module Breadboard
     model_superclass_chain.each do |klass|
       klass_symbol = klass.to_s.to_sym
       site = config.send(klass_symbol).send(environment) || config.send(klass_symbol).send(:all)
-      return site if site
+      if site
+        site = site.call if site.respond_to? :call
+        site = URI.parse site
+        return site
+      end
     end
-    return config.default.send(environment) || config.default.send(:all)
+
+    site = config.default.send(environment) || config.default.send(:all)
+    if site
+      site = site.call if site.respond_to? :call
+      site = URI.parse site
+      return site
+    end
   end
 
   def reset

@@ -137,15 +137,15 @@ Given /^my Rails environment is "([^"]*)"$/ do |environment|
 end
 
 Then /^I should recieve the value configured in the Breadboard "([^"]*)" environment settings for that model$/ do |environment|
-  NoSiteAttribute.site.should == Breadboard.config.NoSiteAttribute.send(environment.to_sym)
+  NoSiteAttribute.site.to_s.should == Breadboard.config.NoSiteAttribute.send(environment.to_sym)
 end
 
 Then /^I should recieve the value configured in the Breadboard "([^"]*)" environment settings for the ancestor of that model$/ do |environment|
-  NoSiteAttribute.site.should == Breadboard.config.Parent.send(environment.to_sym)
+  NoSiteAttribute.site.to_s.should == Breadboard.config.Parent.send(environment.to_sym)
 end
 
 Then /^I should recieve the value configured in the Breadboard "([^"]*)" environment settings in the breadboard defaults section$/ do |environment|
-  NoSiteAttribute.site.should == Breadboard.config.default.send(environment.to_sym)
+  NoSiteAttribute.site.to_s.should == Breadboard.config.default.send(environment.to_sym)
 end
 
 Then /^ActiveResource should ignore more generic configurations in Breadboard$/ do
