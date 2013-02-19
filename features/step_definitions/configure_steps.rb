@@ -136,3 +136,20 @@ Then /^I should be able to configure model with user, password$/ do
   Venue.password.should == "secret"
 end
 
+Then /^I should be able to configure a model with a block$/ do
+  class ConfigWithBlockModel < ActiveResource::Base
+  end
+
+  Breadboard.configure do
+    env { "production" }
+
+    model ConfigWithBlockModel do
+      all do
+        site -> { "http://foobar" }
+      end
+    end
+  end
+
+  ConfigWithBlockModel.site.should be_kind_of URI
+  ConfigWithBlockModel.site.to_s.should == "http://foobar"
+end

@@ -1,3 +1,7 @@
+v1.1.0
+
+Supports blocks as configuration values. Will Read and Matt Parker.
+
 v1.1.0.rc2
   fix bug so that site set in env block returns URI instance
 v1.1.0.rc1

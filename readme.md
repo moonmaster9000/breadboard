@@ -142,3 +142,15 @@ via the `models` method:
         production "http://my.production.publishing.service.provider"
       end
     end
+
+### block values
+
+If you want a lazily evaluated site attribute (for example, if you need to add parameters into your site url at runtime), then simply set the site as a block:
+
+```ruby
+Breadboard.configure do
+  some_model do
+    all -> { "http://somewhere/parents/#{Parent.instance.id}" }
+  end
+end
+```
