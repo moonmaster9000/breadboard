@@ -16,9 +16,9 @@ Gem::Specification.new do |s|
  
   s.homepage = %q{http://github.com/moonmaster9000/breadboard}
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.5.0}
+  s.rubygems_version = %q{2.1.11}
   s.summary = %q{Simple, environment-based service provider configuration for ActiveResource}
-  s.add_dependency(%q<activeresource>, ["~> 3.0"])
-  s.add_development_dependency(%q<cucumber>, ["~> 0.10.0"])
-  s.add_development_dependency(%q<rspec>, ["~> 2.4.0"])
+  s.add_dependency(%q<activeresource>, ["~> 4.0"])
+  s.add_development_dependency(%q<cucumber>, ["~> 1.3"])
+  s.add_development_dependency(%q<rspec>, ["~> 2.14"])
 end
