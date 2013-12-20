@@ -9,7 +9,7 @@ end
 
 Then /^I should be able to configure breadboard via Ruby blocks$/ do
   Breadboard.config.default.all.should == nil
-  
+
   Breadboard.configure do
     default do
       all "http://localhost:3000"
@@ -23,7 +23,7 @@ end
 
 Then /^I should be able to create a default configuration via the "default" Config method$/ do
   Breadboard.config.default.all.should == nil
-  
+
   Breadboard.configure do
     default do
       all "http://localhost:3000"
@@ -37,38 +37,38 @@ end
 
 Then /^I should be able to configure models via their lowercased, underscored method equivalents$/ do
   Breadboard.config.Article.production.should == nil
-  
+
   Breadboard.configure do
     article do
       production "http://haha"
     end
   end
-  
+
   Breadboard.config.Article.production.to_s.should == "http://haha"
 end
 
 Then /^I should be able to configure a model by passing the constant for the model to the "model" method$/ do
   Breadboard.config.Smarticle.production.should == nil
-  
+
   Breadboard.configure do
     model Smarticle do
       production "http://haha"
     end
   end
-  
+
   Breadboard.config.Smarticle.production.to_s.should == "http://haha"
 end
 
 Then /^I should be able to configure multiple models simultaneously by passing their constants to the "models" method$/ do
   Breadboard.config.Particle.production.should == nil
   Breadboard.config.Yarticle.production.should == nil
-  
+
   Breadboard.configure do
     models Particle, Yarticle do
       production "http://haha"
     end
   end
-  
+
   Breadboard.config.Particle.production.to_s.should == "http://haha"
   Breadboard.config.Yarticle.production.to_s.should == "http://haha"
 end
@@ -130,7 +130,7 @@ Then /^I should be able to configure model with user, password$/ do
       end
     end
   end
-  
+
   Venue.site.should be_kind_of URI
   Venue.site.to_s.should == "http://livesite"
   Venue.password.should == "secret"
@@ -152,4 +152,28 @@ Then /^I should be able to configure a model with a block$/ do
 
   ConfigWithBlockModel.site.should be_kind_of URI
   ConfigWithBlockModel.site.to_s.should == "http://foobar"
+end
+
+Then /^I should be able to configure a model with a volatile lambda$/ do
+  class ConfigWithVolatileLamdaModel < ActiveResource::Base
+  end
+
+  class Volatile
+    def self.volatile
+      @i ||= 0
+      @i += 1
+    end
+  end
+
+  Breadboard.configure do
+    env { "production" }
+
+    model ConfigWithVolatileLamdaModel do
+      all do
+        site -> { "http://foobar/#{Volatile.volatile}" }
+      end
+    end
+  end
+
+  ConfigWithVolatileLamdaModel.site.to_s.should == "http://foobar/1"
 end
