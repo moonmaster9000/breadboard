@@ -3,15 +3,17 @@ module Breadboard
     # holds site, user, password values for an environment instance
     class EnvConfig
       def site(url=nil)
-        @site = url if url
+        if url
+          @site = url
+        else
+          return @site if @site.kind_of?(URI)
 
-        return @site if @site.kind_of?(URI)
-
-        if @site
-          if @site.respond_to? :call
-            URI.parse @site.call
-          else
-            URI.parse @site
+          if @site
+            if @site.respond_to? :call
+              URI.parse @site.call
+            else
+              URI.parse @site
+            end
           end
         end
       end

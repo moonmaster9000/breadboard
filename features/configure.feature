@@ -32,3 +32,6 @@ Feature: Configuring Breadboard
 
   Scenario: Configure model with block
     Then I should be able to configure a model with a block
+
+  Scenario: Configure with a volatile lambda
+    Then I should be able to configure a model with a volatile lambda

@@ -29,7 +29,7 @@ Given /^an ActiveResource model without a site attribute$/ do
 end
 
 Given /^a Breadboard configuration with 'production' environment settings for that model$/ do
-  Breadboard.configure do 
+  Breadboard.configure do
     model NoSiteAttribute do
       production "http://set.in.breadboard.exact.match.com"
     end
@@ -37,7 +37,7 @@ Given /^a Breadboard configuration with 'production' environment settings for th
     model Parent do
       production "http://set.in.breadboard.on.parent.com"
     end
-    
+
     default do
       production "http://default.production.com"
       all "http://default.all.com"
@@ -46,7 +46,7 @@ Given /^a Breadboard configuration with 'production' environment settings for th
 end
 
 Given /^a Breadboard configuration with 'all' environment settings for that model$/ do
-  Breadboard.configure do 
+  Breadboard.configure do
     model NoSiteAttribute do
       all "http://set.in.breadboard.exact.match.com"
     end
@@ -54,7 +54,7 @@ Given /^a Breadboard configuration with 'all' environment settings for that mode
     model Parent do
       production "http://set.in.breadboard.on.parent.com"
     end
-    
+
     default do
       production "http://default.production.com"
       all "http://default.all.com"
@@ -63,7 +63,7 @@ Given /^a Breadboard configuration with 'all' environment settings for that mode
 end
 
 Given /^a Breadboard configuration with 'production' environment settings for an ancestor of that model$/ do
-  Breadboard.configure do 
+  Breadboard.configure do
     model NoSiteAttribute do
       test "http://set.in.breadboard.exact.match.test.com"
     end
@@ -71,7 +71,7 @@ Given /^a Breadboard configuration with 'production' environment settings for an
     model Parent do
       production "http://set.in.breadboard.on.parent.com"
     end
-    
+
     default do
       production "http://default.production.com"
       all "http://default.all.com"
@@ -80,7 +80,7 @@ Given /^a Breadboard configuration with 'production' environment settings for an
 end
 
 Given /^a Breadboard configuration with 'all' environment settings for an ancestor of that model$/ do
-  Breadboard.configure do 
+  Breadboard.configure do
     model NoSiteAttribute do
       test "http://set.in.breadboard.exact.match.test.com"
     end
@@ -88,7 +88,7 @@ Given /^a Breadboard configuration with 'all' environment settings for an ancest
     model Parent do
       all "http://set.in.breadboard.on.parent.com"
     end
-    
+
     default do
       production "http://default.production.com"
       all "http://default.all.com"
@@ -97,7 +97,7 @@ Given /^a Breadboard configuration with 'all' environment settings for an ancest
 end
 
 Given /^a Breadboard configuration with 'production' environment settings in the breadboard defaults section$/ do
-  Breadboard.configure do 
+  Breadboard.configure do
     model NoSiteAttribute do
       test "http://set.in.breadboard.exact.match.test.com"
     end
@@ -105,7 +105,7 @@ Given /^a Breadboard configuration with 'production' environment settings in the
     model Parent do
       preview "http://set.in.breadboard.on.parent.com"
     end
-    
+
     default do
       production "http://default.production.com"
       all "http://default.all.com"
@@ -114,7 +114,7 @@ Given /^a Breadboard configuration with 'production' environment settings in the
 end
 
 Given /^a Breadboard configuration with 'all' environment settings in the breadboard defaults section$/ do
-  Breadboard.configure do 
+  Breadboard.configure do
     model NoSiteAttribute do
       test "http://set.in.breadboard.exact.match.test.com"
     end
@@ -122,7 +122,7 @@ Given /^a Breadboard configuration with 'all' environment settings in the breadb
     model Parent do
       preview "http://set.in.breadboard.on.parent.com"
     end
-    
+
     default do
       all "http://default.all.com"
     end
